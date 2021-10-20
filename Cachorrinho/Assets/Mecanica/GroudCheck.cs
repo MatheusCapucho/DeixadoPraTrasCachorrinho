@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class GroudCheck : MonoBehaviour
 {           
-
+ 
     MovPlayer Player;
     // Start is called before the first frame update
     void Start()
