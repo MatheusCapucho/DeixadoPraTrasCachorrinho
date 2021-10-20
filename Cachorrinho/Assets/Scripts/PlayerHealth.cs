@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,14 +13,13 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.UpadateSlider(1);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            healthBar.UpadateSlider(1);
+            healthBar.UpadateSlider(-1);
             currentHealth--;
             if (currentHealth <= 0)
             {
@@ -27,10 +27,23 @@ public class PlayerHealth : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Osso"))
+        {
+            healthBar.UpadateSlider(1);
+            currentHealth++;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            Destroy(other.gameObject);
+        }
+    }
     private void Die()
     {
         // anim.setTrigger("Die");
-        //ScneneManager.LoadScene(SceneManager/activescene);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //restart level
     }
 
 }
