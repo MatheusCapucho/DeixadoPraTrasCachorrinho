@@ -26,10 +26,10 @@ public class MovPlayer : MonoBehaviour
 
     void Move()
     {
-        Vector3 movement= new Vector3(Input.GetAxis("Horizontal"),0f,0f);
+        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"),0f,0f);
         transform.position += movement * Time.deltaTime * speed;
 
-            float inputAxis = Input.GetAxis("Horizontal");
+        float inputAxis = Input.GetAxis("Horizontal");
 
         if(inputAxis > 0)
         {
@@ -45,7 +45,7 @@ public class MovPlayer : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W) && !isJump)
         {
-                    rig.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
+            rig.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
         }
     }
 }
