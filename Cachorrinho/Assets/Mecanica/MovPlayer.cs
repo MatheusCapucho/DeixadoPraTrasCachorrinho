@@ -6,17 +6,16 @@ public class MovPlayer : MonoBehaviour
 {          
         public float speed;
         public float jump;
-        [SerializeField] private float dashTime;
+     
         public bool isJump;
-       
-       
         public Vector2 movement;
+
+
         private float dashAtual;
         private bool canDash;
         public float duracaoDash;
-
-
-            [SerializeField] private float dashSpeed;
+        [SerializeField] private float dashTime;
+        [SerializeField] private float dashSpeed;
 
             private Rigidbody2D rig;
     // Start is called before the first frame update
@@ -32,7 +31,20 @@ public class MovPlayer : MonoBehaviour
     {
         Move();
         Jump();
-        Dash();
+        if(Input.GetKeyDown(KeyCode.L)){
+            Dash();
+            
+        }
+       
+        if(canDash == true) {
+            dashTime -= Time.deltaTime;
+           if( dashTime <= 0){
+                canDash = false;
+            dashTime = duracaoDash;
+           }
+        }
+        
+      
     }
 
 
@@ -62,42 +74,26 @@ public class MovPlayer : MonoBehaviour
 
     void Dash()
     {
-        if(Input.GetKeyDown(KeyCode.L) && canDash) {
-
-            
-            if(dashTime<= 0 )
-            {
-                StopDash();
-            } else{
                 canDash = true;
-                dashAtual -= Time.deltaTime;
-
-
-                if(movement.x > 0){
+                if(rig.velocity.x > 0){
                         rig.velocity = Vector2.right * dashSpeed;
+                        Debug.Log("BRUNO  NÃO ENTRO AQUI");
+                        
 
                 }
-                if(movement.x < 0){
+                if(rig.velocity.x < 0){
 
                         rig.velocity = Vector2.left * dashSpeed;
-                }
-              if(Input.GetKeyDown(KeyCode.I)){
-               canDash = true;
-               dashAtual = duracaoDash;      
 
-            }     
+                }
+             dashTime -= Time.deltaTime;
+             
+              
         }
                     
-        }
+        
        
             
         
 
-         
-    }
-private void StopDash(){
-            rig.velocity = Vector2.zero;
-            dashAtual = duracaoDash;
-            
-            canDash = false; }
 }

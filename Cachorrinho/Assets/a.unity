@@ -423,11 +423,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   jump: 8
-  dashTime: 0
   isJump: 0
   movement: {x: 0, y: 0}
-  duracaoDash: 0.4
-  dashSpeed: 10
+  duracaoDash: 10
+  dashTime: 0
+  dashSpeed: 30
 --- !u!1 &2050470481
 GameObject:
   m_ObjectHideFlags: 0
