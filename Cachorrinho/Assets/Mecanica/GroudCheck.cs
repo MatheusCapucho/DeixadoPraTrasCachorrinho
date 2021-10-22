@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroudCheck : MonoBehaviour
 {           
-
+ 
     MovPlayer Player;
     // Start is called before the first frame update
     void Start()
