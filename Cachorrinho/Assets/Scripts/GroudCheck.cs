@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GroudCheck : MonoBehaviour
 {           
- 
     MovPlayer Player;
-    // Start is called before the first frame update
+    
     void Start()
     {
         Player = gameObject.transform.parent.gameObject.GetComponent<MovPlayer>();
@@ -23,9 +22,9 @@ public class GroudCheck : MonoBehaviour
          void OnCollisionExit2D(Collision2D collisor)
             { 
             if(collisor.gameObject.layer == 8)
-           {
+            {
                 Player.isJump = true;
-           } 
+            } 
 
             }  
  

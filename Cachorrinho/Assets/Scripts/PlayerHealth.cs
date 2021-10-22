@@ -39,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+       
     }
     private void Die()
     {

@@ -27,18 +27,21 @@ public class Zombie : MonoBehaviour
     }
     void Update()
     {
-        if (aux && Vector3.Distance(player.transform.position, startPos) < detectionRange)
+        if (Vector3.Distance(player.transform.position, startPos) < detectionRange)
         {
-            target.x += 2f;
-            aux = false;
-            Debug.Log("entrei");
+            MoveZombie();
         }
 
+    }
+
+    private void MoveZombie()
+    {
         if (transform.position.x < target.x && isMovingRight)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target , speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
             isMovingRight = true;
-        } else
+        }
+        else
         {
             transform.position = Vector3.MoveTowards(transform.position, -target, speed * Time.deltaTime);
             isMovingRight = false;
@@ -46,6 +49,15 @@ public class Zombie : MonoBehaviour
 
         if (transform.position.x <= -target.x)
             isMovingRight = true;
-
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            isMovingRight = !isMovingRight;
+        }
+    }
+
+
 }
