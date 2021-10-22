@@ -18,46 +18,36 @@ public class Zombie : MonoBehaviour
 
     private bool aux;
 
+    private Rigidbody2D rb;
+
     void Start()
     {
         startPos = this.gameObject.transform.position;
-        target = startPos + (moveRange * movementOffset);
         player = GameObject.FindWithTag("Player");
+        rb = GetComponent<Rigidbody2D>();
         aux = true;
     }
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, startPos) < detectionRange)
+        if (Vector3.Distance(player.transform.position, transform.position) < detectionRange)
         {
             MoveZombie();
         }
-
     }
 
     private void MoveZombie()
     {
-        if (transform.position.x < target.x && isMovingRight)
+        if (transform.position.x < player.transform.position.x)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-            isMovingRight = true;
+            rb.velocity = new Vector2(speed, 0);
+            transform.localScale = new Vector2(1, 1);
+   
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, -target, speed * Time.deltaTime);
-            isMovingRight = false;
-        }
-
-        if (transform.position.x <= -target.x)
-            isMovingRight = true;
-    }
-
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            isMovingRight = !isMovingRight;
+            rb.velocity = new Vector2(-speed, 0);
+            transform.localScale = new Vector2(-1, 1);
         }
     }
-
 
 }
