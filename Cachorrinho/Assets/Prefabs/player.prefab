@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17131e8d4831de5419c355dfe0d185b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
-  jump: 10
+  speed: 9
+  jump: 15
   isJump: 0
   movement: {x: 0, y: 0, z: 0}
   duracaoDash: 2
