@@ -9,10 +9,23 @@ public class GroudCheck : MonoBehaviour
     void Start()
     {
         Player = gameObject.transform.parent.gameObject.GetComponent<MovPlayer>();
+        lastJump = 0;
     }
 
-    // Update is called once per frame
-        void OnCollisionEnter2D(Collision2D collisor)
+    private float lastJump = 0;
+    private float nextJump = 0;
+
+    private void FixedUpdate()
+    {
+        nextJump = Time.timeSinceLevelLoad;
+        if (nextJump > lastJump)
+        {
+            lastJump = Time.timeSinceLevelLoad + 2f;
+            Player.isJump = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collisor)
             {
                     if(collisor.gameObject.layer == 8)
                     {

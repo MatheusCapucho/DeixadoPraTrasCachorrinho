@@ -8,91 +8,86 @@ public class MovPlayer : MonoBehaviour
     public float jump;
      
     public bool isJump;
-    public Vector2 movement;
+    public Vector3 movement;
 
-    private float dashAtual;
     private bool canDash;
     public float duracaoDash;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashSpeed;
     private Rigidbody2D rig;
 
+    private Animator anim;
+
     void Start()
     {
-           rig = GetComponent<Rigidbody2D>(); 
-           canDash = true;
-           dashAtual =  duracaoDash;
+        anim = GetComponent<Animator>();
+        rig = GetComponent<Rigidbody2D>(); 
+        canDash = true;
+        dashTime = duracaoDash;
     }
-
-    // Update is called once per frame
     void Update()
     {
+        if (movement.x == 0) { 
+            //anim.SetTrigger("Idle");
+        }
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         Move();
-        Jump();
-        if(Input.GetKeyDown(KeyCode.L)){
-            Dash();
-            
+        if (Input.GetKeyDown(KeyCode.W) && !isJump)
+            Jump();
+        if(Input.GetKeyDown(KeyCode.L) && canDash){
+            Dash();         
         }
        
-        if(canDash == true) {
+        if(!canDash) {
             dashTime -= Time.deltaTime;
            if( dashTime <= 0){
-                canDash = false;
-            dashTime = duracaoDash;
+                canDash = true;
+                dashTime = duracaoDash;
            }
         }
         
       
     }
-
-
     void Move()
     {
-        Vector3 movement = new Vector3(Input.GetAxis("Horizontal"),0f,0f);
-        transform.position += movement * Time.deltaTime * speed;
 
-        float inputAxis = Input.GetAxis("Horizontal");
+        rig.velocity = new Vector2(movement.x * speed, rig.velocity.y);
 
         if(movement.x > 0)
         {
-             transform.eulerAngles = new Vector2(0f, 0f);
+            if (!isJump)
+            {
+                //anim.SetTrigger("Move");
+            }
+            transform.eulerAngles = new Vector2(0f, 0f);
         }
 
         if(movement.x < 0)
         {
-             transform.eulerAngles = new Vector2(0f, 180f);
+            if (!isJump)
+            {
+                //anim.SetTrigger("Move");
+            }
+            transform.eulerAngles = new Vector2(0f, 180f);
         }
     }
     void Jump()
-    {
-        if(Input.GetKeyDown(KeyCode.W) && !isJump)
-        {
-            rig.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
-        }
+    {   
+        rig.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
+        //anim.SetTrigger("Jump");
     }
 
     void Dash()
     {
-                canDash = true;
-                if(rig.velocity.x > 0){
-                        rig.velocity = Vector2.right * dashSpeed;
-                        Debug.Log("BRUNO  NÃO ENTRO AQUI");
-                        
-
-                }
-                if(rig.velocity.x < 0){
-
-                        rig.velocity = Vector2.left * dashSpeed;
-
-                }
-             dashTime -= Time.deltaTime;
-             
-              
+        canDash = false;
+        if (movement.x > 0)
+        {
+            transform.position += new Vector3(dashSpeed, 0f, 0f);
         }
-                    
-        
-       
-            
-        
+        else if (movement.x < 0)
+        {
+            transform.position += new Vector3(-dashSpeed, 0f, 0f);
+        }        
+    }   
 
 }
