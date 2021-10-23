@@ -20,7 +20,7 @@ public class GroudCheck : MonoBehaviour
         nextJump = Time.timeSinceLevelLoad;
         if (nextJump > lastJump)
         {
-            lastJump = Time.timeSinceLevelLoad + 2f;
+            lastJump = Time.timeSinceLevelLoad + 4f;
             Player.isJump = false;
         }
     }
