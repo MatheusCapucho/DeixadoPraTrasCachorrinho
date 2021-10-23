@@ -11,7 +11,6 @@ public class HealthBar : MonoBehaviour
     {
         slider = GetComponent<Slider>();
     }
-
     public void UpadateSlider(int value)
     {
         slider.value += value;

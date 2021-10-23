@@ -10,23 +10,46 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 10;
     [SerializeField] private HealthBar healthBar;
 
+    private Animator anim;
+    private Collider2D col;
+    private Coroutine cr;
+
     void Start()
     {
         currentHealth = maxHealth;
+        anim = GetComponent<Animator>();
+        col = GetComponent<Collider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
-        {
-            healthBar.UpadateSlider(-1);
-            currentHealth--;
+        {       
+           
+            if (cr == null)
+            {
+                currentHealth--;
+                cr = StartCoroutine(Invencibility());
+                healthBar.UpadateSlider(-1);
+            }
+            
+           
             if (currentHealth <= 0)
             {
                 Die();
             }
-        }
+        }     
     }
+
+    IEnumerator Invencibility()
+    {
+        col.enabled = false;
+        yield return new WaitForSeconds(1f);
+        col.enabled = true;
+        cr = null;
+        yield return null;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Osso"))
