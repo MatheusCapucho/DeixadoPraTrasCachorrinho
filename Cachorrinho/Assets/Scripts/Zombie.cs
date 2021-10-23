@@ -16,13 +16,14 @@ public class Zombie : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
+    private bool isFacingRight = true;
 
     void Start()
     {
         startPos = this.gameObject.transform.position;
         player = GameObject.FindWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
     }
     void Update()
     {
@@ -31,23 +32,33 @@ public class Zombie : MonoBehaviour
             MoveZombie();
         } else
         {
-            //anim.SetTrigger("Idle");
+            anim.SetTrigger("Idle");
         }
     }
 
     private void MoveZombie()
     {
-        //anim.SetTrigger("Move");
+        anim.SetTrigger("Move");
         if (transform.position.x < player.transform.position.x)
         {
             rb.velocity = new Vector2(speed, rb.velocity.y);
-            transform.localScale = new Vector2(1, 1);
-   
+            if (isFacingRight == false)
+            {
+                transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+                isFacingRight = true;
+            }
+          
         }
         else
         {
             rb.velocity = new Vector2(-speed, rb.velocity.y);
-            transform.localScale = new Vector2(-1, 1);
+            if (isFacingRight == true)
+            {
+                transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
+                isFacingRight = false;
+            }
+          
+
         }
     }
 
