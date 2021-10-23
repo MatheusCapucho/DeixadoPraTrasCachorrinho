@@ -5,11 +5,13 @@ using UnityEngine;
 public class GroudCheck : MonoBehaviour
 {           
     MovPlayer Player;
+    private Animator anim;
     
     void Start()
     {
         Player = gameObject.transform.parent.gameObject.GetComponent<MovPlayer>();
         lastJump = 0;
+        anim = transform.parent.GetComponent<Animator>();
     }
 
     private float lastJump = 0;
@@ -20,7 +22,7 @@ public class GroudCheck : MonoBehaviour
         nextJump = Time.timeSinceLevelLoad;
         if (nextJump > lastJump)
         {
-            lastJump = Time.timeSinceLevelLoad + 4f;
+            lastJump = Time.timeSinceLevelLoad + 5f;
             Player.isJump = false;
         }
     }
@@ -30,7 +32,8 @@ public class GroudCheck : MonoBehaviour
                     if(collisor.gameObject.layer == 8)
                     {
                         Player.isJump = false;
-                    }
+            anim.SetBool("isJumping", false);
+        }
             }
          void OnCollisionExit2D(Collision2D collisor)
             { 

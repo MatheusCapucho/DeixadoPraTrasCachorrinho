@@ -28,9 +28,9 @@ public class PlayerHealth : MonoBehaviour
            
             if (cr == null)
             {
-                currentHealth--;
+                currentHealth-=2;
                 cr = StartCoroutine(Invencibility());
-                healthBar.UpadateSlider(-1);
+                healthBar.UpadateSlider(-2);
             }
             
            

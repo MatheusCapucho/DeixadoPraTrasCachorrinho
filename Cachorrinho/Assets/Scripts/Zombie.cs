@@ -46,8 +46,7 @@ public class Zombie : MonoBehaviour
             {
                 transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
                 isFacingRight = true;
-            }
-          
+            }       
         }
         else
         {
@@ -57,8 +56,6 @@ public class Zombie : MonoBehaviour
                 transform.localScale = new Vector2(transform.localScale.x * -1, transform.localScale.y);
                 isFacingRight = false;
             }
-          
-
         }
     }
 

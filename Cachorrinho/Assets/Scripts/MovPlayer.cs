@@ -28,7 +28,7 @@ public class MovPlayer : MonoBehaviour
     void Update()
     {
         if (movement.x == 0) { 
-            //anim.SetTrigger("Idle");
+            anim.SetTrigger("Idle");
         }
         movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         Move();
@@ -57,7 +57,7 @@ public class MovPlayer : MonoBehaviour
         {
             if (!isJump)
             {
-                //anim.SetTrigger("Move");
+                anim.SetTrigger("Move");
             }
             transform.eulerAngles = new Vector2(0f, 0f);
         }
@@ -66,7 +66,7 @@ public class MovPlayer : MonoBehaviour
         {
             if (!isJump)
             {
-                //anim.SetTrigger("Move");
+                anim.SetTrigger("Move");
             }
             transform.eulerAngles = new Vector2(0f, 180f);
         }
@@ -74,7 +74,7 @@ public class MovPlayer : MonoBehaviour
     void Jump()
     {   
         rig.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
-        //anim.SetTrigger("Jump");
+        anim.SetBool("isJumping", true);
     }
 
     void Dash()
