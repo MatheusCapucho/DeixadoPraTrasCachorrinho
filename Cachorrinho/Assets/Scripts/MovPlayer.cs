@@ -72,7 +72,8 @@ public class MovPlayer : MonoBehaviour
         }
     }
     void Jump()
-    {   
+    {
+        AudioManager.instance.PlaySound("Jump");
         rig.AddForce(new Vector2(0f, jump), ForceMode2D.Impulse);
         anim.SetBool("isJumping", true);
     }

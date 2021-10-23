@@ -36,11 +36,22 @@ public class Zombie : MonoBehaviour
         }
     }
 
+    private float lastSound = 0f;
+    private float nextSound = 0f;
+
     private void MoveZombie()
     {
         anim.SetTrigger("Move");
+        nextSound = Time.timeSinceLevelLoad;
+        if (nextSound > lastSound && this.gameObject.GetComponent<SpriteRenderer>().isVisible)
+        {
+            AudioManager.instance.PlaySound("Zombie");
+            lastSound = Time.timeSinceLevelLoad + 3.3f;
+        }
+        
         if (transform.position.x < player.transform.position.x)
         {
+          
             rb.velocity = new Vector2(speed, rb.velocity.y);
             if (isFacingRight == false)
             {
@@ -50,6 +61,7 @@ public class Zombie : MonoBehaviour
         }
         else
         {
+            
             rb.velocity = new Vector2(-speed, rb.velocity.y);
             if (isFacingRight == true)
             {

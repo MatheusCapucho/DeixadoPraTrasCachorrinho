@@ -5995,7 +5995,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 486218f49c4e8d448b9521b7ddfe090b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - audioSource: {fileID: 0}
+    name: Jump
+    clip: {fileID: 8300000, guid: 6f212706939f5424bb39732bc0c047ca, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - audioSource: {fileID: 0}
+    name: Die
+    clip: {fileID: 8300000, guid: 19a66ae60efd78b4c98e19fcd45111af, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - audioSource: {fileID: 0}
+    name: Zombie
+    clip: {fileID: 8300000, guid: 4288185abf849db41a353774bf77d527, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
   _masterVolume: 1
 --- !u!4 &2054741316
 Transform:

@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour
            
             if (currentHealth <= 0)
             {
-                Die();
+                StartCoroutine(Die());
             }
         }     
     }
@@ -64,10 +64,15 @@ public class PlayerHealth : MonoBehaviour
         }
        
     }
-    private void Die()
+    IEnumerator Die()
     {
-        // anim.setTrigger("Die");
+        AudioManager.instance.PlaySound("Die");
+        Time.timeScale = 0f;
+        Destroy(GetComponent<MovPlayer>());
+        yield return new WaitForSecondsRealtime(2.5f);
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //restart level
+        yield return null;
     }
 
 }
